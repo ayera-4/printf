@@ -10,29 +10,38 @@
  */
 int _printf(const char *format, ...)
 {
-char *traverse;
-unsigned int i;
-char *s;
+int count = -1;
+if (format != NULL)
+{
+int i;
 va_list arg;
+int (*o)(va_list);
 va_start(arg, format);
-for (traverse = format; *traverse != '\0'; traverse++)
+if (format[0] == '%' && format[1] == '\0')
 {
-while (*traverse != '%')
-{
-_putchar(*traverse);
-traverse++;
+return (-1);
 }
-traverse++;
-switch (*traverse)
+count = 0;
+for (i = 0; format[i] != '\0'; i++)
 {
-case 'c': i = va_arg(arg, int);
-_putchar(i);
-break;
-case 's': s = va_arg(arg, char *);
-_putchar(s);
-break;
+if (format[i + 1] == '%')
+{
+if (format[i + 1] == '%')
+{
+count += _putchar(format[i]);
+i++;
 }
+else if (format[i + 1] != '\0')
+{
+o = fetchfunc(format[i + 1]);
+count += (o ? o(arg) : _putchar(format[i]) + _putchar(format[i + 1]));
+i++;
+}
+}
+else
+count += _putchar(format[i]);
 }
 va_end(arg);
-return (traverse);
+}
+return (count);
 }
