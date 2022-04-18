@@ -5,6 +5,7 @@
 
 /**
  * _printf - produces output according to a format
+ * @format: input parameter
  * Return: number of arguments 
  */
 int _printf(const char *format, ...)
@@ -33,5 +34,5 @@ break;
 }
 }
 va_end(arg);
+return (traverse);
 }
-       
