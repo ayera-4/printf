@@ -6,7 +6,7 @@
  *
  * Return: number of chars and digits printed
  */
-int print_i(va_list i)
+int print_i(va_list i, mods *f)
 {
 	int a[10];
 	int j, m, n, sum, count;
@@ -20,6 +20,10 @@ int print_i(va_list i)
 		m /= 10;
 		a[j] = (n / m) % 10;
 	}
+	if (f->space && !f->plus && n >= 0)
+	  count++;
+	if (f->plus && n >= 0)
+	  count++;
 	if (n < 0)
 	{
 		_putchar('-');
@@ -45,7 +49,7 @@ int print_i(va_list i)
  *
  * Return: number of chars and digits printed
  */
-int print_d(va_list d)
+int print_d(va_list d, mods *f)
 {
 	int a[10];
 	int j, m, n, sum, count;
@@ -59,6 +63,10 @@ int print_d(va_list d)
 		m /= 10;
 		a[j] = (n / m) % 10;
 	}
+	if (f->space && !f->plus && n >= 0)
+	  count++;
+	if (f->plus && n >= 0)
+	  count++;
 	if (n < 0)
 	{
 		_putchar('-');

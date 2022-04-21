@@ -38,7 +38,7 @@ int print_u(va_list u)
  *
  * Return: number of digits printed
  */
-int print_o(va_list o)
+int print_o(va_list o, mods *f)
 {
 	unsigned int a[11];
 	unsigned int i, m, n, sum;
@@ -55,7 +55,7 @@ int print_o(va_list o)
 	for (i = 0, sum = 0, count = 0; i < 11; i++)
 	{
 		sum += a[i];
-		if (sum || i == 10)
+		if (f->hash == 0 && (sum || i == 10))
 		{
 			_putchar('0' + a[i]);
 			count++;

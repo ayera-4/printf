@@ -7,7 +7,7 @@
  *
  * Return: number of digits printed
  */
-int print_hex(unsigned int n, unsigned int c)
+int print_hex(unsigned int n, unsigned int c, mods *f)
 {
 	unsigned int a[8];
 	unsigned int i, m, sum;
@@ -28,7 +28,7 @@ int print_hex(unsigned int n, unsigned int c)
 	for (i = 0, sum = 0, count = 0; i < 8; i++)
 	{
 		sum += a[i];
-		if (sum || i == 7)
+		if (f->hash == 0 && (sum || i == 7))
 		{
 			if (a[i] < 10)
 				_putchar('0' + a[i]);
